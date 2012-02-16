@@ -1,7 +1,18 @@
 require 'active_record'
 
+DB_CONFIG =  {
+     'development' => {
+        'adapter'  => 'postgresql',
+        'database' => 'testapp',
+        'username' => 'testapp',
+        'password' => 'testapp',
+        'host'     => 'localhost',
+        'encoding' => 'UTF8'
+     }
+  }
+
 ActiveRecord::Base.logger = Logger.new('debug.log')
-ActiveRecord::Base.configurations = YAML::load(IO.read('database.yml'))
+ActiveRecord::Base.configurations = DB_CONFIG
 ActiveRecord::Base.establish_connection('development')
 
 ActiveRecord::Schema.define :version => 0 do
