@@ -4,16 +4,14 @@ ActiveRecord::Base.logger = Logger.new('debug.log')
 ActiveRecord::Base.configurations = YAML::load(IO.read('database.yml'))
 ActiveRecord::Base.establish_connection('development')
 
-require 'db/schema'
-
-class PkTest < ActiveRecord::Base
+ActiveRecord::Schema.define :version => 0 do
+   create_table :pk_tests, :force => true do |t|
+     t.string :name
+   end
 end
 
-p = PkTest.create(:name => 'foo')
-puts p.inspect
-p = PkTest.create(:name => 'bar')
-puts p.inspect
-p = PkTest.create(:name => 'foobar')
-puts p.inspect
-p = PkTest.create(:name => 'barfoo')
-puts p.inspect
+class PkTest < ActiveRecord::Base ; end
+
+for x in 1..4 
+  puts PkTest.create( :name=>"Item #{x}" ).inspect 
+end
