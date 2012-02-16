@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: testapp
+  username: testapp
+  password: testapp
+  host: localhost
+  encoding: UTF8
